@@ -23,8 +23,8 @@ class WPRPT {
 
 		if ( ! is_admin() || wp_doing_ajax() ) {
 			add_filter( 'post_thumbnail_id', array($this, 'set_post_thumbnail_id') );
-			add_filter( 'get_post_metadata', array($this, 'filter_get_post_metadata') , 10, 4);
-			add_filter( 'wprpt_all_images', array($this, 'add_global_images') );
+            add_filter( 'wp_get_attachment_image_attributes', array($this, 'add_image_attributes'), 10, 3 );
+            add_filter( 'wprpt_all_images', array($this, 'add_global_images') );
 			add_filter( 'wprpt_all_images', array($this, 'add_images_based_on_post_type') );
 			add_filter( 'wprpt_all_images', array($this, 'add_images_based_on_taxonomy') );
 			add_filter( 'wprpt_all_images', array($this, 'exclude_taxonomy_terms') );
@@ -95,41 +95,6 @@ class WPRPT {
 		$image_id = wprpt_get_random_image();
 
 		return !empty($image_id) ? $image_id : $thumbnail_id;
-
-	}
-
-
-	/**
-	 * Add a filter to modify get_post_metadata() so we can add a filter on the
-	 * post thumbnail ID. So, now there's a new filter 'post_thumbnail_id'.
-	 *
-	 * @see https://gist.github.com/westonruter/5808015
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param $value (null|array|string)
-	 * @param $object_id (int|array|string)
-	 * @param $meta_key (string|array|string)
-	 * @param $single (string|array|string)
-	 * @return string
-	 */
-	function filter_get_post_metadata( $value, $post_id, $meta_key, $single ) {
-
-		// We want to pass the actual _thumbnail_id into the filter, so requires recursion
-		static $is_recursing = false;
-
-		// Only filter if we're not recursing and if it is a post thumbnail ID
-		if ( ! $is_recursing && $meta_key === '_thumbnail_id' ) {
-			$is_recursing = true; // prevent this conditional when get_post_thumbnail_id() is called
-			$value = get_post_thumbnail_id( $post_id );
-			$is_recursing = false;
-			$value = apply_filters( 'post_thumbnail_id', $value, $post_id ); // yay!
-			if ( ! $single ) {
-				$value = array( $value );
-			}
-		}
-
-		return $value;
 
 	}
 
@@ -285,5 +250,45 @@ class WPRPT {
 
 		return $new_links + $links;
 	}
+
+    /**
+     * Adds custom attributes to the image tag.
+     *
+     * If the current image is one of the random images, we add a class to the
+     * image tag.
+     *
+     * @since 2.6.0
+     *
+     * @param array $attr Attributes for the image markup.
+     * @param object $attachment Image attachment post.
+     * @param string $size Requested image size.
+     * @return array
+     */
+    function add_image_attributes( array $attr, object $attachment, string $size ) : array
+    {
+        $post_id                = get_the_ID();
+
+        if ( ! $post_id ) {
+            return $attr;
+        }
+
+        $original_thumbnail_id  = get_post_meta($post_id, '_thumbnail_id', true);
+
+        if ( ! empty($original_thumbnail_id) ) {
+            return $attr;
+        }
+
+        $all_images = apply_filters( 'wprpt_all_images', array() );
+
+        if ( array_key_exists( $attachment->ID, $all_images ) ) {
+            $new_class = apply_filters( 'wprpt_random_post_image_class', 'wprpt-random-post-image' );
+
+            if ( ! empty($new_class) ) {
+                $attr['class'] .= ' ' . $new_class;
+            }
+        }
+
+        return $attr;
+    }
 
 }

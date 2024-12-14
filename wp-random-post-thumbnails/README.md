@@ -17,6 +17,25 @@ None yet!
 
 ## Changelog
 
+[ 2.6.0 ]
+
+* Checked compatability with Wordpress 6.7.
+* Removing a custom filter which was designed to add in a `post_thumbnail_id` filter. Wordpress core now has the `post_thumbnail_id` filter, so our custom filter is no longer needed.
+* Added support for a class added to the images (when they are a random image). Use the `wprpt_random_post_image_class` filter to change the class name if needed.
+
+[ 2.5.0 ]
+
+* Updating CMB2 to the latest version to fix some PHP7 issues.
+
+[ 2.4.0 ]
+
+* Adding a new setting allowing users to exclude terms from having their posts utilize random thumbnails
+
+[ 2.3.0 ]
+
+* Changing the doing_ajax constant to the new Wordpress function.
+* Fixing a php foreach loop warning in template-tags.php
+
 [ 2.3.0 ]
 
 * Changing the doing_ajax constant to the new Wordpress function.

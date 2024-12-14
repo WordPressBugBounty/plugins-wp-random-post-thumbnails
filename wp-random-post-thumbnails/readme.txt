@@ -1,10 +1,10 @@
 === WP Random Post Thumbnails ===
 Contributors: bdeleasa
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9AJYKL3BHB6RS&lc=US&item_name=WP%20Random%20Post%20Thumbnails%20Wordpress%20Plugin&item_number=WPRPT&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
-Tags: post thumbnails, random images, random featured images, random post thumbnails, random post thumbnail, random thumbnails
-Tested up to: 4.9.4
+Tags: post thumbnails, random images, random featured images, random thumbnails, random post thumbnail
+Tested up to: 6.7.1
 Requires at least: 3.5
-Stable tag: 2.5.0
+Stable tag: 2.6.0
 License: GPL v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -27,11 +27,17 @@ None yet!
 
 == Changelog ==
 
+= 2.6.0 =
+
+* Checked compatability with Wordpress 6.7.
+* Removing a custom filter which was designed to add in a `post_thumbnail_id` filter. Wordpress core now has the `post_thumbnail_id` filter, so our custom filter is no longer needed.
+* Added support for a class added to the images (when they are a random image). Use the `wprpt_random_post_image_class` filter to change the class name if needed.
+
 = 2.5.0 =
 
 * Updating CMB2 to the latest version to fix some PHP7 issues.
 
-= 2.4.0
+= 2.4.0 =
 
 * Adding a new setting allowing users to exclude terms from having their posts utilize random thumbnails
 
