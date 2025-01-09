@@ -17,6 +17,10 @@ None yet!
 
 ## Changelog
 
+[ 2.6.1 ]
+
+* Minor adjustment to `classes/class-wprpt.php` to fix a potential PHP error in PHP7.
+
 [ 2.6.0 ]
 
 * Checked compatability with Wordpress 6.7.

@@ -3,7 +3,7 @@
 Plugin Name: WP Random Post Thumbnails
 Plugin URI: https://wordpress.org/plugins/wp-random-post-thumbnails/
 Description: Allows you to select images to be shown at random for posts without a featured image. Useful if your theme shows thumbnails for the posts, and you don't want any posts without images.
-Version: 2.6.0
+Version: 2.6.1
 Author: Brianna Deleasa
 Author URI: http://www.briannadeleasa.com
 License: GPL v3

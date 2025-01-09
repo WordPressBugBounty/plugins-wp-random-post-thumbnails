@@ -261,10 +261,10 @@ class WPRPT {
      *
      * @param array $attr Attributes for the image markup.
      * @param object $attachment Image attachment post.
-     * @param string $size Requested image size.
+     * @param ?string $size Requested image size.
      * @return array
      */
-    function add_image_attributes( array $attr, object $attachment, string $size ) : array
+    function add_image_attributes( array $attr, object $attachment, ?string $size ) : array
     {
         $post_id                = get_the_ID();
 
