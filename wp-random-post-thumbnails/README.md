@@ -17,6 +17,10 @@ None yet!
 
 ## Changelog
 
+[ 2.6.2 ]
+
+* Patching minor type error with $sizes in `add_image_attributes` in `classes/class-wprpt.php`.
+
 [ 2.6.1 ]
 
 * Minor adjustment to `classes/class-wprpt.php` to fix a potential PHP error in PHP7.

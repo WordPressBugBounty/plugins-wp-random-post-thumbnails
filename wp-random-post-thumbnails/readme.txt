@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9AJYK
 Tags: post thumbnails, random images, random featured images, random thumbnails, random post thumbnail
 Tested up to: 6.7.1
 Requires at least: 3.5
-Stable tag: 2.6.1
+Stable tag: 2.6.2
 License: GPL v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -26,6 +26,10 @@ This plugin allows you to upload a set of images via a settings page to be shown
 None yet!
 
 == Changelog ==
+
+= 2.6.2 =
+
+* Patching minor type error with $sizes in `add_image_attributes` in `classes/class-wprpt.php`.
 
 = 2.6.1 =
 
